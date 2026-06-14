@@ -30,8 +30,8 @@ these high-risk patients, following strict eligibility requirements.
 |---|---|---|
 | 1–2 | Negative / Benign | Routine annual screening |
 | 3 | Probably benign | 6-month follow-up CT |
-| 4A | Suspicious (5–15% malignancy risk) | 3-month follow-up CT |
-| 4B | Highly suspicious (>15% risk, nodule ≥15mm) |
+| 4A | Suspicious (5 - 15% malignancy risk) | 3-month follow-up CT |
+| 4B | Highly suspicious (> 15% risk, nodule ≥ 15mm) |
 | 4X | Very suspicious (alarming features any size) |
 
 Not all referred patients proceed to chemotherapy. The clinical pathway is:
@@ -56,41 +56,41 @@ Not all referred patients proceed to chemotherapy. The clinical pathway is:
 
 ## Workflow Summary
 
-### Step 1 — Data Requirements Assessment (Artefact 1)
+### Step 1: Data Requirements Assessment (Artefact 1)
 Defined the research question, mapped required variables to their REDCap
 fields and Epic sources (with HL7 FHIR R4 resource mapping), documented
 the expected clinical pathway funnel, and completed the governance checklist
 before any data was touched.
 
-### Step 2 — REDCap Extraction (nlcsp_redcap.csv)
+### Step 2: REDCap Extraction (nlcsp_redcap.csv)
 Simulated a REDCap Data Export of the full NLCSP screened cohort (n=100).
 Contains all Lung-RADS scores (1 through 4X) and referral status.
 SQL filter: `lung_rads_score IN ('4B','4X') AND referred_to_petmac = 'Yes'`
 reduces cohort to 10 referred participants.
 
-### Step 3 — Epic Extraction (nlcsp_epic.csv)
+### Step 3: Epic Extraction (nlcsp_epic.csv)
 Simulated an Epic EMR extract for the 10 referred patients only.
 Variables mapped to FHIR resources (Patient, Condition, Procedure,
 MedicationAdministration). Includes biopsy date, malignancy confirmation,
 and first chemotherapy date — making the full clinical pathway visible.
 
-### Step 4 — Data Integration (nlcsp_integrated.csv)
+### Step 4: Data Integration (nlcsp_integrated.csv)
 INNER JOIN on pseudonymised `patient_id`. Derived primary outcome variable
 `screen_to_treatment_days`. Applied analytical cohort filter:
 confirmed malignant AND commenced chemotherapy → n=7.
 
-### Step 5 — SQL Analytical Workflow (artefact2_extraction_script.sql)
+### Step 5: SQL Analytical Workflow (artefact2_extraction_script.sql)
 Structured in 6 steps: REDCap extract → Epic extract → JOIN → clinical
 pathway funnel → data quality checks → primary analysis by Lung-RADS
-subcategory. Each Epic field annotated with its FHIR resource and element.
+subcategory. Each Epic field is annotated with its FHIR resource and element.
 
-### Step 6 — Reporting Output (artefact3_report_output.png)
+### Step 6: Reporting Output (artefact3_report_output.png)
 Three-panel dashboard:
 - Panel 1: Full Lung-RADS distribution across 100 screened participants
 - Panel 2: Clinical pathway funnel (100 → 10 → 8 → 7)
 - Panel 3: Median screen-to-chemo time by Lung-RADS subcategory (4B vs 4X)
 
-### Step 7 — Process Log (artefact3_process_log.md)
+### Step 7: Process Log (artefact3_process_log.md)
 Documents extraction methods, FHIR mappings used, linkage approach, data
 quality findings, decisions made during analysis, governance confirmation,
 and learnings for future requests — to document data processes to support 
@@ -104,18 +104,18 @@ sustainable, collaborative models of clinical data use.
   → **7 commenced first-line chemotherapy**
 - **Overall median screen-to-chemotherapy: 59 days**
 - **Lung-RADS 4X: median 49 days** vs **Lung-RADS 4B: median 59 days**
-- 4X patients reach treatment faster, consistent with clinical urgency of
+- 4X patients reach treatment faster, consistent with the clinical urgency of
   their imaging findings
 
 ---
 
 ## Technologies Used
 
-- **Python** (csv, datetime, pandas, matplotlib) — data generation,
+- **Python** (csv, datetime, pandas, matplotlib) - data generation,
   analysis, visualisation
-- **SQL** — data extraction, integration, quality checks, summary analytics
-- **HL7 FHIR R4** — variable mapping to Epic data structures
-- **Markdown** — documentation, data request, process log
+- **SQL** - data extraction, integration, quality checks, summary analytics
+- **HL7 FHIR R4** - variable mapping to Epic data structures
+- **Markdown** - documentation, data request, process log
 
 ---
 
