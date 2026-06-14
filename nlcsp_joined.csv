@@ -1,0 +1,8 @@
+patient_id,screen_date,lung_rads_score,referred_to_petmac,age_group,biopsy_date,confirmed_malignant,diagnosis_date,commenced_chemo,first_chemo_date,screen_to_treatment_days
+PM0003,2023-12-09,4B,Yes,65+,2024-01-04,Yes,2024-01-08,Yes,2024-02-28,81
+PM0018,2024-02-05,4B,Yes,65+,2024-02-29,Yes,2024-03-05,Yes,2024-04-21,76
+PM0024,2024-03-17,4B,Yes,65+,2024-04-01,Yes,2024-04-05,Yes,2024-05-08,52
+PM0037,2024-01-12,4X,Yes,65+,2024-01-26,Yes,2024-02-02,Yes,2024-03-11,59
+PM0051,2023-08-27,4X,Yes,65+,2023-09-13,Yes,2023-09-16,Yes,2023-10-06,40
+PM0069,2024-01-08,4B,Yes,<65,2024-01-23,Yes,2024-01-26,Yes,2024-03-01,53
+PM0072,2024-03-28,4B,Yes,<65,2024-04-19,Yes,2024-04-23,Yes,2024-05-26,59
