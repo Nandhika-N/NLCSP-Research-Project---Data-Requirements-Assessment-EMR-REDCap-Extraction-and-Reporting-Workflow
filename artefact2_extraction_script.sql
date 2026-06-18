@@ -11,9 +11,6 @@
 -- Data Sources:
 --   nlcsp_redcap  — REDCap NLCSP screening dataset (n=100)
 --   nlcsp_epic    — Epic EMR extract (n=10 referred patients)
---
--- Author:  Nandhika Nelluri
--- Date:    June 2026
 -- ============================================================
 
 
